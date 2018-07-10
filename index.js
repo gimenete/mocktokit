@@ -1,7 +1,7 @@
 const produce = require('immer').default
 const express = require('express')
 const bodyParser = require('body-parser')
-const http = require('http');
+const http = require('http')
 
 const routes = require('@octokit/rest/lib/routes.json')
 const app = express()
@@ -11,14 +11,14 @@ const initialState = {
   issues: []
 }
 
-module.exports = (port, webhook) => {
+module.exports = port => {
   let state = initialState
   let history = [state]
 
   const implementations = {}
 
   for (const section of Object.keys(routes)) {
-    implementations[section] = require('./impl/' + section)({ webhook })
+    implementations[section] = require('./impl/' + section)()
 
     const methods = routes[section]
     for (const method of Object.keys(methods)) {
@@ -30,10 +30,12 @@ module.exports = (port, webhook) => {
       app[info.method.toLowerCase()](info.url, async (req, res, next) => {
         try {
           const { params, body } = req
+          const data = { ...params, ...body }
 
           let result = null
           state = produce(state, nextState => {
-            result = implementation(nextState, { params, body })
+            const emitWebhook = event => {}
+            result = implementation(nextState, data, emitWebhook)
           })
           history.push(state)
           res.json(result)
@@ -48,7 +50,7 @@ module.exports = (port, webhook) => {
 
   const httpServer = http.createServer(app)
   return new Promise((resolve, reject) => {
-    httpServer.listen(port, (err) => {
+    httpServer.listen(port, err => {
       if (err) return reject(err)
       resolve({
         getState() {
@@ -66,4 +68,3 @@ module.exports = (port, webhook) => {
     })
   })
 }
-

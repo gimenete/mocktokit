@@ -1,10 +1,10 @@
 const produce = require('immer').default
 
-module.exports = ({ webhook }) => {
+module.exports = () => {
+  let nextIssueNumber = 1 // TODO. different per repo
   return {
-    'create': async (state, { params, body: data }) => {
-      const { owner, repo } = params
-      const { title, body, assignee, milestone, labels, assignees } = data
+    create: async (state, data, emitWebhook) => {
+      const { owner, repo, title, body, assignee, milestone, labels, assignees } = data
       const issue = {
         owner,
         repo,
@@ -12,11 +12,20 @@ module.exports = ({ webhook }) => {
         milestone,
         title,
         labels: labels || [],
-        body: body || '',
-        assignees
+        body: body || '',
+        assignees,
+        number: nextIssueNumber++
       }
       state.issues.push(issue)
-      // TODO: send event to webhook
+
+      const repository = {
+        name: repo
+      }
+      const sender = {
+        login: 'test'
+      }
+
+      emitWebhook({ action: 'opened', issue, repository, sender })
 
       // TODO: mimic GitHub response
       return issue

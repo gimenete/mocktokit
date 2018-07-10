@@ -51,3 +51,5 @@ Implement a web UI similar to github.com using [Primer](https://primer.github.io
 - Inspect the state visually
 - Modify things (e.g. an issue) to trigger webhook events
 - Inspect a log of webhook events
+
+This also would lower the barrier to create [probot](https://github.com/probot/probot) applications. Initially you won't have to create a GitHub app, nor any webhook integration. You would be able to start writing your application and see a UI similar to github.com seeing the results of your code and the ability to interact with it and thus, triggering events to the probot application.

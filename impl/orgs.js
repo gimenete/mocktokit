@@ -1,3 +1,3 @@
-module.exports = ({ webhook }) => {
+module.exports = () => {
   return {}
 }
