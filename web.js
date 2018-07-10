@@ -246,7 +246,7 @@ class App extends Component {
     return (
       <HashRouter>
         <Fragment>
-          <div className={`main ${this.state.devToolsOpen ? 'open' : ''}`}>
+          <div className={`mk-main ${this.state.devToolsOpen ? 'open' : ''}`}>
             <h1>Mocktokit</h1>
             <Navigation />
             <Switch>
@@ -261,7 +261,7 @@ class App extends Component {
           </div>
           <div
             className="clearfix pl-4 pr-4 pt-2 pb-2"
-            className={`dev-tools ${this.state.devToolsOpen ? 'open' : ''}`}
+            className={`mk-dev-tools ${this.state.devToolsOpen ? 'open' : ''}`}
           >
             <div className="clearfix text-center">
               <button
