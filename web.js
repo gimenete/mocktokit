@@ -315,6 +315,7 @@ class App extends Component {
                       src={event.event}
                       collapsed={1}
                       enableClipboard={false}
+                      displayDataTypes={false}
                     />
                   </div>
                 ))}
