@@ -40,7 +40,17 @@ const Navigation = () => {
 }
 
 const Home = () => {
-  return <div>Home</div>
+  return (
+    <div>
+      <div className="blankslate blankslate-clean-background">
+        <h3>Welcome to mocktokit</h3>
+        <p>
+          This is a very, very experimental project. This is only a demo where you can only create
+          issues.
+        </p>
+      </div>
+    </div>
+  )
 }
 
 const Users = () => {
@@ -234,7 +244,7 @@ class Repl extends Component {
 
 class App extends Component {
   state = {
-    devToolsOpen: false
+    devToolsOpen: true
   }
   componentDidMount() {
     github.on('state-changed', () => this.forceUpdate())
@@ -278,7 +288,7 @@ class App extends Component {
             <div className="col-sm-6 float-left pr-2">
               <nav className="menu mt-2" aria-labelledby="menu-heading">
                 <span className="menu-heading" id="menu-heading">
-                  Events
+                  Webhook events
                 </span>
                 {github.getState().events.map(event => (
                   <div className="menu-item" aria-current="page" key={event.id}>

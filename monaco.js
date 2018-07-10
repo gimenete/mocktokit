@@ -32,6 +32,7 @@ const initEditor = element => {
     ].join('\n'),
     language: 'typescript',
     scrollBeyondLastLine: false,
+    automaticLayout: true,
     minimap: {
       enabled: false
     }
