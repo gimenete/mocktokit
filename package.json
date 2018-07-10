@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "cp web/index.html dist && webpack"
+    "build": "mkdir dist && cp web/index.html dist && webpack"
   },
   "keywords": [],
   "author": "Alberto Gimeno <gimenete@gimenete.net>",
